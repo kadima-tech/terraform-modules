@@ -1,0 +1,74 @@
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name                                                      | Version |
+| --------------------------------------------------------- | ------- |
+| <a name="provider_google"></a> [google](#provider_google) | n/a     |
+| <a name="provider_random"></a> [random](#provider_random) | n/a     |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name                                                                                                                                                                                    | Type     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [google_monitoring_alert_policy.cpu_utilization_policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy)                         | resource |
+| [google_monitoring_alert_policy.disk_utilization_policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy)                        | resource |
+| [google_monitoring_alert_policy.memory_utilization_policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy)                      | resource |
+| [google_monitoring_alert_policy.read_io_policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy)                                 | resource |
+| [google_monitoring_alert_policy.write_io_policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy)                                | resource |
+| [google_secret_manager_secret.connection_string_secret](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)                           | resource |
+| [google_secret_manager_secret.db_account_secret](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)                                  | resource |
+| [google_secret_manager_secret.fivetran_db_account_secret](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)                         | resource |
+| [google_secret_manager_secret_version.connection_string_secret_version](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret_version)   | resource |
+| [google_secret_manager_secret_version.db_account_secret_version](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret_version)          | resource |
+| [google_secret_manager_secret_version.fivetran_db_account_secret_version](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret_version) | resource |
+| [google_sql_database.standin](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database)                                                              | resource |
+| [google_sql_database_instance.master](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance)                                             | resource |
+| [google_sql_database_instance.read_replica](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance)                                       | resource |
+| [google_sql_user.fivetran_user](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user)                                                                | resource |
+| [google_sql_user.standin_api](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user)                                                                  | resource |
+| [random_string.fivetran_sql_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string)                                                            | resource |
+| [random_string.standin_api_sql_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string)                                                         | resource |
+
+## Inputs
+
+| Name                                                                                                               | Description                                                                                                                                                                                                                                                                                    | Type           | Default         | Required |
+| ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | --------------- | :------: |
+| <a name="input_alert_notification_channels"></a> [alert_notification_channels](#input_alert_notification_channels) | The alert channel to publish alerts to                                                                                                                                                                                                                                                         | `list(string)` | `[]`            |    no    |
+| <a name="input_autovacuum_freeze_max_age"></a> [autovacuum_freeze_max_age](#input_autovacuum_freeze_max_age)       | Specifies the maximum age (in transactions) that a table's pg_class.relfrozenxid field can attain before a VACUUM operation is forced to prevent transaction ID wraparound within the table. Recommended at 500000000 https://github.com/jberkus/annotated.conf/blob/master/annotated.csv#L149 | `number`       | `500000000`     |    no    |
+| <a name="input_database_version"></a> [database_version](#input_database_version)                                  | The version of the database to run                                                                                                                                                                                                                                                             | `string`       | `"POSTGRES_13"` |    no    |
+| <a name="input_deletion_protection"></a> [deletion_protection](#input_deletion_protection)                         | Should this database be prevented from being deleted                                                                                                                                                                                                                                           | `bool`         | `true`          |    no    |
+| <a name="input_fivetran_username"></a> [fivetran_username](#input_fivetran_username)                               | n/a                                                                                                                                                                                                                                                                                            | `string`       | `"fivetran"`    |    no    |
+| <a name="input_logical_decoding"></a> [logical_decoding](#input_logical_decoding)                                  | n/a                                                                                                                                                                                                                                                                                            | `string`       | `"on"`          |    no    |
+| <a name="input_max_replication_slots"></a> [max_replication_slots](#input_max_replication_slots)                   | n/a                                                                                                                                                                                                                                                                                            | `number`       | `10`            |    no    |
+| <a name="input_max_standby_archive_delay"></a> [max_standby_archive_delay](#input_max_standby_archive_delay)       | Sets the maximum delay (in ms) before canceling queries when a hot standby server is processing archived WAL data                                                                                                                                                                              | `number`       | `3600000`       |    no    |
+| <a name="input_max_standby_streaming_delay"></a> [max_standby_streaming_delay](#input_max_standby_streaming_delay) | Sets the maximum delay (in ms) before canceling queries when a hot standby server is processing streamed WAL data                                                                                                                                                                              | `number`       | `3600000`       |    no    |
+| <a name="input_name"></a> [name](#input_name)                                                                      | n/a                                                                                                                                                                                                                                                                                            | `string`       | `"standin"`     |    no    |
+| <a name="input_private_network"></a> [private_network](#input_private_network)                                     | The private network in which this resource will live                                                                                                                                                                                                                                           | `string`       | n/a             |   yes    |
+| <a name="input_project"></a> [project](#input_project)                                                             | The project name                                                                                                                                                                                                                                                                               | `string`       | n/a             |   yes    |
+| <a name="input_query_string_length"></a> [query_string_length](#input_query_string_length)                         | Sets the maximum query string length that is logged in query insights                                                                                                                                                                                                                          | `number`       | `1024`          |    no    |
+| <a name="input_region"></a> [region](#input_region)                                                                | n/a                                                                                                                                                                                                                                                                                            | `string`       | n/a             |   yes    |
+| <a name="input_sql_disk_size"></a> [sql_disk_size](#input_sql_disk_size)                                           | n/a                                                                                                                                                                                                                                                                                            | `string`       | n/a             |   yes    |
+| <a name="input_sql_machine_type"></a> [sql_machine_type](#input_sql_machine_type)                                  | n/a                                                                                                                                                                                                                                                                                            | `string`       | n/a             |   yes    |
+| <a name="input_sql_max_connections"></a> [sql_max_connections](#input_sql_max_connections)                         | n/a                                                                                                                                                                                                                                                                                            | `string`       | n/a             |   yes    |
+| <a name="input_username"></a> [username](#input_username)                                                          | n/a                                                                                                                                                                                                                                                                                            | `string`       | `"standin"`     |    no    |
+
+## Outputs
+
+| Name                                                                                                        | Description |
+| ----------------------------------------------------------------------------------------------------------- | ----------- |
+| <a name="output_connection_name"></a> [connection_name](#output_connection_name)                            | n/a         |
+| <a name="output_connection_string"></a> [connection_string](#output_connection_string)                      | n/a         |
+| <a name="output_connection_string_secret"></a> [connection_string_secret](#output_connection_string_secret) | n/a         |
+| <a name="output_instance"></a> [instance](#output_instance)                                                 | n/a         |
+| <a name="output_ip_address"></a> [ip_address](#output_ip_address)                                           | n/a         |
+| <a name="output_name"></a> [name](#output_name)                                                             | n/a         |
+| <a name="output_password"></a> [password](#output_password)                                                 | n/a         |
+| <a name="output_password_secret"></a> [password_secret](#output_password_secret)                            | n/a         |
+| <a name="output_username"></a> [username](#output_username)                                                 | n/a         |
