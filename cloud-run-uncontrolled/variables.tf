@@ -98,7 +98,7 @@ variable "map_domains" {
 
 variable "max_instances" {
   type        = number
-  default     = 1
+  default     = 3
   description = "Maximum number of container instances allowed to start."
 }
 

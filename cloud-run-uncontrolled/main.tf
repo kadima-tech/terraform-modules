@@ -14,9 +14,6 @@ resource "google_cloud_run_service" "default" {
       {
         "run.googleapis.com/ingress"    = var.ingress
         "client.knative.dev/user-image" = var.image
-      },
-      length(local.secrets_to_aliases) < 1 ? {} : {
-        "run.googleapis.com/secrets" = join(",", [for secret, alias in local.secrets_to_aliases : "${alias}:${secret}"])
       }
     )
   }
@@ -128,7 +125,7 @@ resource "google_cloud_run_service" "default" {
           "autoscaling.knative.dev/minScale"      = var.min_instances
         },
         var.cpu_throttling == null ? {} : {
-          "run.googleapis.com/cpu-throttling" = var.cpu_throttling
+          "run.googleapis.com/cpu-throttling"     = var.cpu_throttling
         },
         var.vpc_connector_name == null ? {} : {
           "run.googleapis.com/vpc-access-connector" = var.vpc_connector_name
@@ -206,12 +203,7 @@ resource "google_compute_backend_service" "load-balancer-backend" {
   security_policy = var.security_policy
 
   backend {
-    capacity_scaler = 0.3
-    group           = google_compute_region_network_endpoint_group.serverless-neg[count.index].id
-  }
-
-  lifecycle {
-    create_before_destroy = true
+    group = google_compute_region_network_endpoint_group.serverless-neg[count.index].id
   }
 }
 
