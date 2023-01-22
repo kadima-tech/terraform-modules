@@ -21,6 +21,8 @@ resource "google_vpc_access_connector" "connector" {
   project  = var.project
   provider = google-beta
 
+  region = var.region
+
   name = "connector-vpc-access"
   subnet {
     name = google_compute_subnetwork.internal-connector-subnet.name
