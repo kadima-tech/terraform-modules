@@ -133,3 +133,29 @@ resource "google_secret_manager_secret_version" "connection_string_secret_versio
   secret_data = "postgresql://${google_sql_user.main.name}:${nonsensitive(google_sql_user.main.password)}@${google_sql_database_instance.master.private_ip_address}/${google_sql_database.main.name}"
 }
 
+resource "google_secret_manager_secret" "public_connection_string_secret" {
+  secret_id = "${var.name}_${var.username}_public_connection_string"
+  project   = var.project
+
+  labels = {
+    type     = "public_database_connection_string"
+    database = var.name
+    user     = var.username
+  }
+
+  replication {
+    automatic = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      project
+    ]
+  }
+}
+
+resource "google_secret_manager_secret_version" "public_connection_string_secret_version" {
+  secret      = google_secret_manager_secret.public_connection_string_secret.id
+  secret_data = "postgresql://${google_sql_user.main.name}:${nonsensitive(google_sql_user.main.password)}@${google_sql_database_instance.master.public_ip_address}/${google_sql_database.main.name}"
+}

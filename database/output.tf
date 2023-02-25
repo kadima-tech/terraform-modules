@@ -26,6 +26,10 @@ output "connection_string_secret" {
   value = google_secret_manager_secret.connection_string_secret.id
 }
 
+output "public_connection_string_secret" {
+  value = google_secret_manager_secret.public_connection_string_secret.id
+}
+
 output "connection_string" {
   value = "postgresql://${google_sql_user.main.name}:${nonsensitive(google_sql_user.main.password)}@${google_sql_database_instance.master.private_ip_address}/${google_sql_database.main.name}"
 }
