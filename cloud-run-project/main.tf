@@ -67,7 +67,7 @@ resource "google_secret_manager_secret" "cloudrun_deployer_secret" {
   secret_id = "cloudrun_deployer_secret"
 
   replication {
-    automatic = true
+    auto {}
   }
 }
 

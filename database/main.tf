@@ -90,7 +90,7 @@ resource "google_secret_manager_secret" "db_account_secret" {
   }
 
   replication {
-    automatic = true
+    auto {}
   }
 
   lifecycle {
@@ -117,7 +117,7 @@ resource "google_secret_manager_secret" "connection_string_secret" {
   }
 
   replication {
-    automatic = true
+    auto {}
   }
 
   lifecycle {
@@ -144,7 +144,7 @@ resource "google_secret_manager_secret" "public_connection_string_secret" {
   }
 
   replication {
-    automatic = true
+    auto {}
   }
 
   lifecycle {

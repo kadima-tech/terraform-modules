@@ -17,7 +17,7 @@ resource "google_secret_manager_secret" "deployer-key" {
   }
 
   replication {
-    automatic = true
+    auto {}
   }
 }
 
@@ -62,7 +62,7 @@ resource "google_storage_bucket" "static-site" {
   }
 
   cors {
-    origin          = ["http://${var.host}","https://${var.host}"]
+    origin          = ["http://${var.host}", "https://${var.host}"]
     method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
     response_header = ["*"]
     max_age_seconds = 3600
