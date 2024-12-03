@@ -55,6 +55,10 @@ resource "google_sql_database_instance" "master" {
   timeouts {
     create = "10m"
   }
+
+  lifecycle {
+    ignore_changes = [settings.0.disk_size]
+  }
 }
 
 resource "google_sql_database" "main" {
