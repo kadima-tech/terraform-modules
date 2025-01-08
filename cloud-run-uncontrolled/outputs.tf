@@ -192,3 +192,7 @@ output "loadbalancer_backend" {
 output "instance_url" {
   value = google_cloud_run_service.default.status[0].url
 }
+
+output "network_endpoint_group" {
+  value = var.loadbalancer_backend_create ? google_compute_region_network_endpoint_group.serverless-neg[0].id : null
+}
